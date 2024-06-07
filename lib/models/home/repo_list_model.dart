@@ -39,7 +39,7 @@ class Item {
     int? openIssuesCount;
     String? masterBranch;
     String? defaultBranch;
-    int? score;
+    double? score;
     String? archiveUrl;
     String? assigneesUrl;
     String? blobsUrl;
