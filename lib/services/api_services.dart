@@ -30,7 +30,9 @@ class ApiServices {
       return await client.get(
         uri,
         headers: {
-          if (token != null) 'Authorization': 'Bearer $token',
+           if (token != null) 'Authorization': 'Bearer $token',
+          'Accept': "application/vnd.github+json",
+          'X-GitHub-Api-Version': "2022-11-28"
         },
       ).timeout(
         Duration(seconds: timer ?? 30),
@@ -44,7 +46,9 @@ class ApiServices {
         uri,
         body: body,
         headers: {
-          if (token != null) 'Authorization': 'Bearer $token',
+           if (token != null) 'Authorization': 'Bearer $token',
+          'Accept': "application/vnd.github+json",
+          'X-GitHub-Api-Version': "2022-11-28"
         },
       ).timeout(
         Duration(seconds: timer ?? 30),
@@ -58,7 +62,9 @@ class ApiServices {
         uri,
         body: body,
         headers: {
-          if (token != null) 'Authorization': 'Bearer $token',
+           if (token != null) 'Authorization': 'Bearer $token',
+          'Accept': "application/vnd.github+json",
+          'X-GitHub-Api-Version': "2022-11-28"
         },
       ).timeout(
         Duration(seconds: timer ?? 30),
@@ -72,7 +78,9 @@ class ApiServices {
         uri,
         body: body,
         headers: {
-          if (token != null) 'Authorization': 'Bearer $token',
+           if (token != null) 'Authorization': 'Bearer $token',
+          'Accept': "application/vnd.github+json",
+          'X-GitHub-Api-Version': "2022-11-28"
         },
       ).timeout(
         Duration(seconds: timer ?? 30),
