@@ -63,33 +63,42 @@ class Repositories extends StatelessWidget {
                           ),
                         ),
                       ListView.separated(
-                          physics: const NeverScrollableScrollPhysics(),
-                          separatorBuilder: (context, index) => kH16sizedBox,
-                          itemCount: homeController.repoList.length,
-                          shrinkWrap: true,
-                          itemBuilder: (context, index) {
-                            Item item = homeController.repoList[index];
-                            return CustomListTile(
-                              padding: const EdgeInsets.all(k16Padding),
-                              spacing: h8,
-                              itemColor: cGreyBoxColor,
-                              borderColor: cBlackColor,
-                              leading: UserAvatar(
-                                userImageUrl: item.owner!.avatarUrl ?? "",
-                              ),
-                              title: Text(
-                                item.name!,
-                                style: semiBold16TextStyle(cBlackColor),
-                              ),
-                              subtitle: Text(
-                                "Owner: ${item.owner!.login}",
-                                style: regular16TextStyle(cIconColor),
-                              ),
-                              trailing: RatingWidget(
-                                rating: item.score!,
-                              ),
-                            );
-                          })
+                        physics: const NeverScrollableScrollPhysics(),
+                        separatorBuilder: (context, index) => kH16sizedBox,
+                        itemCount: homeController.repoList.length,
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          Item item = homeController.repoList[index];
+                          return CustomListTile(
+                            padding: const EdgeInsets.all(k16Padding),
+                            spacing: h8,
+                            itemColor: cGreyBoxColor,
+                            borderColor: cBlackColor,
+                            leading: UserAvatar(
+                              userImageUrl: item.owner!.avatarUrl ?? "",
+                            ),
+                            title: Text(
+                              item.name!,
+                              style: semiBold16TextStyle(cBlackColor),
+                            ),
+                            subtitle: Text(
+                              "Owner: ${item.owner!.login}",
+                              style: regular16TextStyle(cIconColor),
+                            ),
+                            trailing: RatingWidget(
+                              rating: item.score!,
+                            ),
+                          );
+                        },
+                      ),
+                      if (homeController.repoList.isNotEmpty && homeController.isRepoListPaginationLoading.value)
+                        const Padding(
+                          padding: EdgeInsets.only(top: h10),
+                          child: CustomLoading(
+                            isTextVisible: false,
+                          ),
+                        ),
+                      kH30sizedBox
                     ],
                   ),
                 ),
