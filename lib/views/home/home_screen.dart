@@ -1,4 +1,5 @@
-import 'package:startup_boilerplate/controllers/common/global_controller.dart';
+
+import 'package:startup_boilerplate/controllers/home/home_controller.dart';
 import 'package:startup_boilerplate/models/dummy.dart';
 import 'package:startup_boilerplate/utils/constants/imports.dart';
 import 'package:startup_boilerplate/views/widgets/common/buttons/custom_button.dart';
@@ -7,7 +8,7 @@ import 'package:startup_boilerplate/views/widgets/common/utils/custom_list_tile.
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
-  final GlobalController globalController = Get.find<GlobalController>();
+  final HomeController homeController = Get.find<HomeController>();
 
   @override
   Widget build(BuildContext context) {
@@ -35,9 +36,11 @@ class HomeScreen extends StatelessWidget {
             child: ListView(
               shrinkWrap: true,
               children: [
-                const Align(
-                  alignment: Alignment.center,
-                  child: Text("Data from api"),
+                CustomElevatedButton(
+                  label: "Get Flutter Repositories",
+                  onPressed: () async {
+                    await homeController.getRepoList();
+                  },
                 ),
               ],
             ),
@@ -46,35 +49,35 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
-
-  customListView() {
-    return ListView.builder(
-        itemCount: globalController.listData.length,
-        shrinkWrap: true,
-        itemBuilder: (context, index) {
-          ListData item = globalController.listData[index];
-          return CustomListTile(
-            leading: ClipOval(
-              child: Container(
-                height: h16,
-                width: h16,
-                decoration: const BoxDecoration(
-                  color: cBlackColor,
-                  shape: BoxShape.circle,
-                ),
-                child: Image.network(
-                  item.avatar ?? "",
-                  fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) => const Icon(
-                    Icons.person,
-                    size: kIconSize24,
-                    color: cIconColor,
-                  ),
-                ),
-              ),
-            ),
-            title: Text(item.firstName!),
-          );
-        });
-  }
 }
+//   customListView() {
+//     return ListView.builder(
+//         itemCount: globalController.listData.length,
+//         shrinkWrap: true,
+//         itemBuilder: (context, index) {
+//           ListData item = globalController.listData[index];
+//           return CustomListTile(
+//             leading: ClipOval(
+//               child: Container(
+//                 height: h16,
+//                 width: h16,
+//                 decoration: const BoxDecoration(
+//                   color: cBlackColor,
+//                   shape: BoxShape.circle,
+//                 ),
+//                 child: Image.network(
+//                   item.avatar ?? "",
+//                   fit: BoxFit.cover,
+//                   errorBuilder: (context, error, stackTrace) => const Icon(
+//                     Icons.person,
+//                     size: kIconSize24,
+//                     color: cIconColor,
+//                   ),
+//                 ),
+//               ),
+//             ),
+//             title: Text(item.firstName!),
+//           );
+//         });
+//   }
+// }
