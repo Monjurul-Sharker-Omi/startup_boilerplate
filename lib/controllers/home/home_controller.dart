@@ -16,11 +16,13 @@ class HomeController extends GetxController {
   final RxList<Item> repoList = RxList<Item>([]);
   final ScrollController repoListScrollController = ScrollController();
   final Rx<Item?> userRepoInfo = Rx<Item?>(null);
+  final TextEditingController tokenTextEditingController = TextEditingController();
 
   //* API call for list
   Future<void> getRepoList() async {
     try {
       isRepoListLoading.value = true;
+      String? token = await spController.getBearerToken();
       String suffixUrl = '?page=$pageNumber';
       var response = await apiServices.commonApiCall(
         requestMethod: get,
@@ -47,6 +49,7 @@ class HomeController extends GetxController {
   Future<void> getMoreRepoList() async {
     try {
       isRepoListPaginationLoading.value = true;
+      String? token = await spController.getBearerToken();
       String suffixUrl = '?page=${pageNumber + 1}';
       var response = await apiServices.commonApiCall(
         requestMethod: get,
@@ -72,5 +75,9 @@ class HomeController extends GetxController {
   void routeToUserProfile(Item item) {
     userRepoInfo.value = item;
     Get.toNamed(krUserProfile);
+  }
+
+  void saveToken(token) async {
+    await spController.saveBearerToken(token);
   }
 }
