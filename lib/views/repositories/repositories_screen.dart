@@ -1,3 +1,4 @@
+import 'package:flutter/rendering.dart';
 import 'package:startup_boilerplate/controllers/home/home_controller.dart';
 import 'package:startup_boilerplate/models/home/repo_list_model.dart';
 import 'package:startup_boilerplate/utils/constants/imports.dart';
@@ -33,46 +34,61 @@ class Repositories extends StatelessWidget {
           body: SizedBox(
             width: width,
             child: Obx(
-              () => ListView(
-                physics: AlwaysScrollableScrollPhysics(),
-                shrinkWrap: true,
-                children: [
-                  if (homeController.isRepoListLoading.value)
-                    const Center(
-                      child: CustomLoading(
-                        isTextVisible: false,
+              () => NotificationListener<ScrollNotification>(
+                onNotification: (scrollNotification) {
+                  if (homeController.repoListScrollController.position.userScrollDirection == ScrollDirection.reverse &&
+                      scrollNotification.metrics.pixels == scrollNotification.metrics.maxScrollExtent &&
+                      !homeController.isRepoListPaginationLoading.value) {
+                    homeController.isRepoListPaginationLoading.value = true;
+                    if (homeController.repoList.isNotEmpty) {
+                      homeController.getMoreRepoList();
+                    }
+                    return true;
+                  }
+                  return false;
+                },
+                child: ListView(
+                  controller: homeController.repoListScrollController,
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  children: [
+                    if (homeController.isRepoListLoading.value)
+                      const Center(
+                        child: CustomLoading(
+                          isTextVisible: false,
+                        ),
                       ),
-                    ),
-                  ListView.builder(
-                      physics: NeverScrollableScrollPhysics(),
-                      itemCount: homeController.repoList.length,
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) {
-                        Item item = homeController.repoList[index];
-                        return CustomListTile(
-                          leading: ClipOval(
-                            child: Container(
-                              height: h16,
-                              width: h16,
-                              decoration: const BoxDecoration(
-                                color: cBlackColor,
-                                shape: BoxShape.circle,
-                              ),
-                              child: Image.network(
-                                item.owner!.avatarUrl ?? "",
-                                fit: BoxFit.cover,
-                                errorBuilder: (context, error, stackTrace) => const Icon(
-                                  Icons.person,
-                                  size: kIconSize24,
-                                  color: cIconColor,
+                    ListView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: homeController.repoList.length,
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          Item item = homeController.repoList[index];
+                          return CustomListTile(
+                            leading: ClipOval(
+                              child: Container(
+                                height: h16,
+                                width: h16,
+                                decoration: const BoxDecoration(
+                                  color: cBlackColor,
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Image.network(
+                                  item.owner!.avatarUrl ?? "",
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (context, error, stackTrace) => const Icon(
+                                    Icons.person,
+                                    size: kIconSize24,
+                                    color: cIconColor,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                          title: Text(item.name!),
-                        );
-                      })
-                ],
+                            title: Text(item.name!),
+                          );
+                        })
+                  ],
+                ),
               ),
             ),
           ),

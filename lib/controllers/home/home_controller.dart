@@ -14,6 +14,7 @@ class HomeController extends GetxController {
   final RxBool repoListScrolled = RxBool(false);
   final Rx<RepoListModel?> repoListData = Rx<RepoListModel?>(null);
   final RxList<Item> repoList = RxList<Item>([]);
+  final ScrollController repoListScrollController = ScrollController();
 
   //* API call for list
   Future<void> getRepoList() async {
