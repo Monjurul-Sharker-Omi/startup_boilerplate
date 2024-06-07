@@ -2,8 +2,8 @@ import 'package:startup_boilerplate/controllers/common/sp_controller.dart';
 import 'package:startup_boilerplate/services/api_services.dart';
 import 'package:startup_boilerplate/utils/constants/imports.dart';
 
-class HomeController extends GetxController{
-   final SpController spController = SpController();
+class HomeController extends GetxController {
+  final SpController spController = SpController();
   final ApiServices apiServices = ApiServices();
 
   final RxBool isPageLoading = RxBool(false);
@@ -15,7 +15,7 @@ class HomeController extends GetxController{
       var response = await apiServices.commonApiCall(
         requestMethod: get,
         token: token,
-        url: "/search/repositories",
+        url: "/search/repositories?q=Q",
       );
       if (response != null) {
         // listData.clear();
