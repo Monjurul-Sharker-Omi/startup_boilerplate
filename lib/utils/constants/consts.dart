@@ -32,6 +32,7 @@ BorderRadius k100CircularBorderRadius = BorderRadius.circular(100.0);
 const double kAppBarSize = 44.0;
 
 //* size
+const double h40 = 40.0;
 const double h36 = 36.0;
 const double h32 = 32.0;
 const double h28 = 28.0;
@@ -98,4 +99,3 @@ const kH48sizedBox = SizedBox(height: k48Padding);
 const kH50sizedBox = SizedBox(height: k50Padding);
 const kH60sizedBox = SizedBox(height: k60Padding);
 const kH100sizedBox = SizedBox(height: k100Padding);
-
