@@ -22,7 +22,7 @@ class HomeController extends GetxController {
   Future<void> getRepoList() async {
     try {
       isRepoListLoading.value = true;
-      String? token = await spController.getBearerToken();
+      // String? token = await spController.getBearerToken();
       String suffixUrl = '?page=$pageNumber';
       var response = await apiServices.commonApiCall(
         requestMethod: get,
@@ -49,7 +49,7 @@ class HomeController extends GetxController {
   Future<void> getMoreRepoList() async {
     try {
       isRepoListPaginationLoading.value = true;
-      String? token = await spController.getBearerToken();
+      // String? token = await spController.getBearerToken();
       String suffixUrl = '?page=${pageNumber + 1}';
       var response = await apiServices.commonApiCall(
         requestMethod: get,

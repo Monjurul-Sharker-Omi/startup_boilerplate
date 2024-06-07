@@ -1,3 +1,5 @@
+//* token
+const String token = "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";
 
 //* API methods
 const String post = "POST";

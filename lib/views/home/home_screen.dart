@@ -32,16 +32,16 @@ class HomeScreen extends StatelessWidget {
           body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: kHorizontalPadding),
             child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-              CustomModifiedTextField(
-                hint: "Enter github token",
-                controller: homeController.tokenTextEditingController,
-              ),
-              kH16sizedBox,
-              CustomElevatedButton(
-                  label: "Save token",
-                  onPressed: () {
-                    homeController.saveToken(homeController.tokenTextEditingController.text.trim());
-                  }),
+              // CustomModifiedTextField(
+              //   hint: "Enter github token",
+              //   controller: homeController.tokenTextEditingController,
+              // ),
+              // kH16sizedBox,
+              // CustomElevatedButton(
+              //     label: "Save token",
+              //     onPressed: () {
+              //       homeController.saveToken(homeController.tokenTextEditingController.text.trim());
+              //     }),
               kH16sizedBox,
               CustomElevatedButton(
                 label: "Get Flutter Repositories",
