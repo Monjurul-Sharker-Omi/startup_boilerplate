@@ -70,11 +70,15 @@ class Repositories extends StatelessWidget {
                         itemBuilder: (context, index) {
                           Item item = homeController.repoList[index];
                           return CustomListTile(
+                            onPressed: (){
+                              homeController.routeToUserProfile(item);
+                            },
                             padding: const EdgeInsets.all(k16Padding),
                             spacing: h8,
                             itemColor: cGreyBoxColor,
                             borderColor: cBlackColor,
                             leading: UserAvatar(
+                              size: h40,
                               userImageUrl: item.owner!.avatarUrl ?? "",
                             ),
                             title: Text(

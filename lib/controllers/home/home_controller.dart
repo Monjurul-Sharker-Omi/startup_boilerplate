@@ -15,6 +15,7 @@ class HomeController extends GetxController {
   final Rx<RepoListModel?> repoListData = Rx<RepoListModel?>(null);
   final RxList<Item> repoList = RxList<Item>([]);
   final ScrollController repoListScrollController = ScrollController();
+  final Rx<Item?> userRepoInfo = Rx<Item?>(null);
 
   //* API call for list
   Future<void> getRepoList() async {
@@ -65,5 +66,11 @@ class HomeController extends GetxController {
       isRepoListPaginationLoading.value = false;
       ll('getMoreRepoList error: $e');
     }
+  }
+
+  //* Other functions
+  void routeToUserProfile(Item item) {
+    userRepoInfo.value = item;
+    Get.toNamed(krUserProfile);
   }
 }
