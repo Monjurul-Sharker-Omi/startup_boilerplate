@@ -45,7 +45,7 @@ class HomeController extends GetxController {
   Future<void> getMoreRepoList() async {
     try {
       isRepoListPaginationLoading.value = true;
-      String suffixUrl = '?page=${pageNumber+1}';
+      String suffixUrl = '?page=${pageNumber + 1}';
       var response = await apiServices.commonApiCall(
         requestMethod: get,
         token: token,

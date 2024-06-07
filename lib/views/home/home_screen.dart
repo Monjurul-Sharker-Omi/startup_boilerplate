@@ -1,10 +1,7 @@
-
 import 'package:startup_boilerplate/controllers/home/home_controller.dart';
-import 'package:startup_boilerplate/models/dummy.dart';
 import 'package:startup_boilerplate/utils/constants/imports.dart';
 import 'package:startup_boilerplate/views/widgets/common/buttons/custom_button.dart';
 import 'package:startup_boilerplate/views/widgets/common/utils/custom_app_bar.dart';
-import 'package:startup_boilerplate/views/widgets/common/utils/custom_list_tile.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -22,27 +19,24 @@ class HomeScreen extends StatelessWidget {
             //* info:: appBar
             child: CustomAppBar(
               appBarColor: cWhiteColor,
-              title: "App bar",
+              title: "Home",
               titleColor: cPrimaryColor,
               hasBackButton: false,
-              isCenterTitle: false,
+              isCenterTitle: true,
               onBack: () {
                 Get.back();
               },
             ),
           ),
-          body: SizedBox(
-            width: width,
-            child: ListView(
-              shrinkWrap: true,
-              children: [
-                CustomElevatedButton(
-                  label: "Get Flutter Repositories",
-                  onPressed: () async {
-                    await homeController.getRepoList();
-                  },
-                ),
-              ],
+          body: Center(
+            child: CustomElevatedButton(
+              label: "Get Flutter Repositories",
+              onPressed: () async {
+                Get.toNamed(krRepositories);
+                if (homeController.repoList.isEmpty) {
+                  await homeController.getRepoList();
+                }
+              },
             ),
           ),
         ),
@@ -50,34 +44,3 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
-//   customListView() {
-//     return ListView.builder(
-//         itemCount: globalController.listData.length,
-//         shrinkWrap: true,
-//         itemBuilder: (context, index) {
-//           ListData item = globalController.listData[index];
-//           return CustomListTile(
-//             leading: ClipOval(
-//               child: Container(
-//                 height: h16,
-//                 width: h16,
-//                 decoration: const BoxDecoration(
-//                   color: cBlackColor,
-//                   shape: BoxShape.circle,
-//                 ),
-//                 child: Image.network(
-//                   item.avatar ?? "",
-//                   fit: BoxFit.cover,
-//                   errorBuilder: (context, error, stackTrace) => const Icon(
-//                     Icons.person,
-//                     size: kIconSize24,
-//                     color: cIconColor,
-//                   ),
-//                 ),
-//               ),
-//             ),
-//             title: Text(item.firstName!),
-//           );
-//         });
-//   }
-// }
